@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Rathi | Aspiring Product Manager & Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A0E27;
+            --secondary: #1A1F4D;
+            --accent: #00D9FF;
+            --accent-warm: #FF6B35;
+            --text-primary: #E8E9F3;
+            --text-secondary: #A0A3BD;
+            --bg-card: #13172E;
+            --border: #2A2F5C;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 150px;
+            position: relative;
+        }
+
+        .hero-accent {
+            position: absolute;
+            top: 100px;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.15), transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 25px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: slideIn 0.6s ease-out 0.1s backwards;
+        }
+
+        .hero h1 .accent-text {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: slideIn 0.6s ease-out 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: slideIn 0.6s ease-out 0.3s backwards;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-github {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-github:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-case-study {
+            background: transparent;
+            color: var(--accent-warm);
+            border: 2px solid var(--accent-warm);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-case-study:hover {
+            background: var(--accent-warm);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .about-highlights {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .about-highlights h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--accent);
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .highlight-item::before {
+            content: '→';
+            color: var(--accent);
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .skill-category h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skill-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 4px 12px;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .skill-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .skill-list li {
+            padding: 10px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(42, 47, 92, 0.5);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 35px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .project-role {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .project-learning {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            margin: 20px 0;
+        }
+
+        .project-learning strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 6px 14px;
+            background: rgba(42, 47, 92, 0.5);
+            border-radius: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Case Studies Section */
+        .case-study {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 45px;
+            margin-bottom: 40px;
+            transition: all 0.3s;
+        }
+
+        .case-study:hover {
+            border-color: var(--accent-warm);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-study-header {
+            margin-bottom: 30px;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid var(--accent-warm);
+            border-radius: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--accent-warm);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .case-study h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .case-study-meta {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        .case-study-section {
+            margin-bottom: 25px;
+        }
+
+        .case-study-section h4 {
+            color: var(--accent-warm);
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .case-study-section p, .case-study-section ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .case-study-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .case-study-section li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+
+        .case-study-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-warm);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Learning Journey */
+        .journey-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .journey-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .journey-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .journey-card h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .journey-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .experience-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+        }
+
+        .experience-item h4 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .experience-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .experience-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 15px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about-content,
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 14px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">&lt;RR/&gt;</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-accent"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-tag">Aspiring Product Manager | Software Engineer</span>
+                <h1>Building Products, <span class="accent-text">Learning PM</span></h1>
+                <p>Software engineer transitioning into product management through hands-on projects, structured frameworks, and real-world case studies.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Coding Projects</a>
+                    <a href="#case-studies" class="btn btn-secondary">Product Case Studies</a>
+                    <a href="https://drive.google.com/file/d/1T-0_wYvQOfZG4Rcg9P-mxgWWYKYIo5Mq/view?usp=sharing" download class="btn btn-secondary">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">Engineer Learning Product</h2>
+                <p class="section-subtitle">Understanding how to build the right thing, not just build things right.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm Rohit Rathi, a recent Computer Science graduate from Ahmedabad University with a minor in Business Analytics. Throughout my academic journey, I've built full-stack applications and worked on machine learning projects, but I've always been drawn to the "why" behind what we build.</p>
+                    
+                    <p>My interest in product management emerged when I realized that successful products require more than clean code—they need deep user understanding, strategic thinking, and cross-functional collaboration. While working on projects like CuraConnect and Crypted Vault, I found myself naturally gravitating toward user research, feature prioritization, and understanding market needs.</p>
+                    
+                    <p>My software engineering background gives me a unique advantage: I can evaluate technical feasibility, communicate effectively with development teams, and understand implementation constraints. But I'm actively learning the product side—requirements gathering, stakeholder management, prioritization frameworks, and metrics-driven thinking.</p>
+                    
+                    <p>I'm approaching product management as a beginner with structure and discipline. I'm studying PM frameworks like CIRCLES and CRSDIO, writing practice case studies, and applying product thinking to real projects. I'm learning to ask better questions, validate assumptions, and think about problems from user, business, and technical perspectives simultaneously.</p>
+                </div>
+                
+                <div class="about-highlights">
+                    <h3>What I'm Learning</h3>
+                    <div class="highlight-item">Requirements Gathering: Translating user needs into clear product specifications</div>
+                    <div class="highlight-item">Stakeholder Thinking: Understanding different perspectives across business, tech, and users</div>
+                    <div class="highlight-item">Feature Prioritization: Making trade-offs using frameworks like RICE and MoSCoW</div>
+                    <div class="highlight-item">Product Metrics: Defining success criteria and tracking meaningful KPIs</div>
+                    <div class="highlight-item">Agile Workflows: Managing sprints, writing user stories, and iterating based on feedback</div>
+                    <div class="highlight-item">PRD Writing: Documenting product requirements clearly for cross-functional teams</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Capabilities</span>
+                <h2 class="section-title">Skills & Technologies</h2>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>
+                        Product Management
+                        <span class="skill-badge">Learning</span>
+                    </h3>
+                    <ul class="skill-list">
+                        <li>Problem Framing & User Research</li>
+                        <li>Requirements Gathering & Documentation</li>
+                        <li>Feature Prioritization (RICE, MoSCoW)</li>
+                        <li>Agile & Scrum Methodologies</li>
+                        <li>Writing PRDs & User Stories</li>
+                        <li>Stakeholder Management</li>
+                        <li>Market Research & Competitive Analysis</li>
+                        <li>Product Metrics & KPI Tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>
+                        Full Stack Development
+                        <span class="skill-badge">Proficient</span>
+                    </h3>
+                    <ul class="skill-list">
+                        <li>React, Node.js, Express.js, MongoDB</li>
+                        <li>JavaScript, TypeScript, Python, C++</li>
+                        <li>REST APIs & JWT Authentication</li>
+                        <li>Tailwind CSS, HTML5, CSS3</li>
+                        <li>SQL, Pandas, Data Analysis</li>
+                        <li>Git, GitHub, Version Control</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>
+                        Web3 & Blockchain
+                        <span class="skill-badge">Exploring</span>
+                    </h3>
+                    <ul class="skill-list">
+                        <li>IPFS Decentralized Storage</li>
+                        <li>Ethereum & Solana</li>
+                        <li>Smart Contracts (Solidity)</li>
+                        <li>Wallet Integration (MetaMask)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>
+                        Product Tools & Frameworks
+                        <span class="skill-badge">Learning</span>
+                    </h3>
+                    <ul class="skill-list">
+                        <li>Jira & Project Management</li>
+                        <li>Figma (UI/UX Basics)</li>
+                        <li>Excel & Data Analysis</li>
+                        <li>CIRCLES Framework</li>
+                        <li>CRSDIO Framework</li>
+                        <li>UML Diagrams (Use Case, DFD, Sequence)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Case Studies Section -->
+    <section id="case-studies">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Product Thinking</span>
+                <h2 class="section-title">PM Case Studies</h2>
+                <p class="section-subtitle">Interview preparation case studies applying product frameworks to real companies.</p>
+            </div>
+
+  <!-- HugoHub Case Study -->
+            <div class="case-study">
+                <div class="case-study-header">
+                    <span class="case-study-tag">Interview Case Study</span>
+                    <h3>HugoHub: Cross-Border Payments Platform</h3>
+                    <p class="case-study-meta">Practice case study applying CIRCLES & CRSDIO frameworks to B2B fintech infrastructure</p>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Problem Understanding</h4>
+                    <ul>
+                        <li>Cross-border payments are slow, expensive, opaque, and operationally complex</li>
+                        <li>Businesses struggle with multiple payment rails, high FX costs, and regulatory burden</li>
+                        <li>End users face long settlement times, hidden fees, and lack of visibility</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Key Assumptions</h4>
+                    <ul>
+                        <li>Target customers are B2B fintechs, marketplaces, and platforms, not end consumers</li>
+                        <li>Speed, cost transparency, and integration simplicity are top decision drivers</li>
+                        <li>Users prefer fiat-first experiences even if backend uses crypto/stablecoins</li>
+                        <li>Regulatory compliance must be built-in, not an afterthought</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Target Users</h4>
+                    <p><strong>Primary (B2B):</strong></p>
+                    <ul>
+                        <li>Crypto-native platforms</li>
+                        <li>Cross-border remittance apps</li>
+                        <li>Gig economy platforms</li>
+                        <li>E-commerce marketplaces</li>
+                    </ul>
+                    <p><strong>Secondary (B2C via clients):</strong></p>
+                    <ul>
+                        <li>Migrant workers</li>
+                        <li>Freelancers & digital nomads</li>
+                        <li>International shoppers and sellers</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Frameworks Applied</h4>
+                    <ul>
+                        <li><strong>CIRCLES:</strong> Used for problem understanding, user needs, and solution design</li>
+                        <li><strong>CRSDIO:</strong> Used for end-to-end product lifecycle thinking (Clarify → Research → Solution → Delivery → Impact → Optimization)</li>
+                        <li><strong>ICE / RICE:</strong> Used for pain point and persona prioritization</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Proposed Solution</h4>
+                    <p><strong>A Unified Cross-Border Payments & Wallets API platform</strong> that uses stablecoins as the settlement layer while exposing a fiat-only experience</p>
+                    <p><strong>Key capabilities:</strong></p>
+                    <ul>
+                        <li>Multi-currency wallets for seamless balance management</li>
+                        <li>Fiat ↔ Stablecoin abstraction (users think in fiat, system settles in crypto)</li>
+                        <li>Intelligent payment routing based on cost, speed, and corridor availability</li>
+                        <li>Built-in compliance (KYC/AML) as a service</li>
+                        <li>Real-time tracking & transparent pricing with no hidden fees</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Feature Prioritization Logic (ICE Framework)</h4>
+                    <p><strong>Top priorities based on Impact × Confidence × Ease:</strong></p>
+                    <ul>
+                        <li><strong>1. Fiat-crypto abstraction</strong> → Biggest adoption blocker; users need familiar UX</li>
+                        <li><strong>2. Fast settlement (&lt;1 hour)</strong> → Core value proposition vs. traditional rails</li>
+                        <li><strong>3. Developer-friendly unified APIs</strong> → Reduces integration friction dramatically</li>
+                        <li><strong>4. Compliance-as-a-service</strong> → Removes major barrier for smaller fintechs</li>
+                        <li><strong>5. Transparent pricing & FX visibility</strong> → Builds trust and differentiates from incumbents</li>
+                    </ul>
+                    <p>Focused MVP on high-impact, high-confidence problems first</p>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Success Metrics I Would Track</h4>
+                    <p><strong>Business Metrics:</strong></p>
+                    <ul>
+                        <li>Cost per transaction (targeting 50-70% reduction vs. traditional rails)</li>
+                        <li>Revenue per client (MRR + transaction fees)</li>
+                        <li>Corridor expansion rate (new geography pairs per quarter)</li>
+                    </ul>
+                    <p><strong>Product Metrics:</strong></p>
+                    <ul>
+                        <li>Time-to-first-transaction (developer onboarding efficiency)</li>
+                        <li>Settlement time P90 (target: &lt;1 hour for 90% of transactions)</li>
+                        <li>API uptime & failure rate (target: 99.9% uptime)</li>
+                    </ul>
+                    <p><strong>User Metrics:</strong></p>
+                    <ul>
+                        <li>Transaction success rate (target: &gt;98%)</li>
+                        <li>Support tickets per 1,000 transactions</li>
+                        <li>Client retention & NPS score</li>
+                    </ul>
+                </div>
+
+                <div class="case-study-section">
+                    <h4>Trade-offs & Open Questions</h4>
+                    <p><strong>Trade-offs:</strong></p>
+                    <ul>
+                        <li>Regulatory speed vs. market expansion (compliance takes time but is necessary)</li>
+                        <li>Stablecoin dependency vs. traditional rails reliability (crypto can be volatile/uncertain)</li>
+                        <li>Simplicity vs. flexibility for enterprise clients (one-size-fits-all vs. customization)</li>
+                    </ul>
+                    <p><strong>Open Questions:</strong></p>
+                    <ul>
+                        <li>Which corridors justify stablecoin rails vs. traditional rails?</li>
+                        <li>How to price enterprise clients vs. SMBs fairly while maximizing revenue?</li>
+                        <li>How fast can compliance scale across jurisdictions without compromising quality?</li>
+                        <li>What's the optimal balance between automation and human oversight for fraud detection?</li>
+                    </ul>
+                </div>
+
+                <a href="https://drive.google.com/file/d/12w0GNrEmaMECIA7zKttD83zqR59aTqsl/view?usp=sharing" target="_blank" class="btn-case-study">
+                    📄 View Case Study PDF
+                </a>
+            </div>
+
+<!-- Data Analysis Case Study -->
+<div class="case-study">
+    <div class="case-study-header">
+        <span class="case-study-tag">Data Analysis Case Study</span>
+        <h3>Gold-Backed Lending Risk & Collateral Analysis</h3>
+        <p class="case-study-meta">Applied statistical analysis and risk modeling to optimize haircut policies and collateral management in secured business lending</p>
+    </div>
+
+    <div class="case-study-section">
+        <h4>Problem Understanding</h4>
+        <ul>
+            <li>Bank provides business loans secured by gold collateral</li>
+            <li>Key challenge is to manage haircut levels and minimize credit risk</li>
+            <li>Gold price fluctuations and borrower defaults impact collateral coverage</li>
+        </ul>
+    </div>
+
+    <div class="case-study-section">
+        <h4>Approach & Methods</h4>
+        <ul>
+            <li>Correlation analysis to identify key drivers of haircut levels</li>
+            <li>ANOVA to evaluate the impact of categorical variables (segment, country)</li>
+            <li>Multiple Linear Regression (MLR) to determine statistically significant predictors</li>
+            <li>Expected Loss modeling using EAD, PD, and LGD</li>
+        </ul>
+    </div>
+
+    <div class="case-study-section">
+        <h4>Key Insights</h4>
+        <ul>
+            <li>Haircut levels are primarily driven by borrower segment and default rate</li>
+            <li>Other factors like loan amount, collateral value, vault fees, and country have limited impact</li>
+            <li>All borrowers were found to be under-collateralised due to declining gold prices</li>
+        </ul>
+    </div>
+
+    <div class="case-study-section">
+        <h4>Risk & Business Recommendations</h4>
+        <ul>
+            <li>Adopt risk-based haircut policies across borrower segments</li>
+            <li>Maintain minimum collateral coverage above 110%</li>
+            <li>Implement real-time gold price monitoring and margin call triggers</li>
+            <li>Design lending rules to keep expected loss below 3%</li>
+        </ul>
+    </div>
+
+    <div class="case-study-section">
+        <h4>Outcome</h4>
+        <ul>
+            <li>Estimated minimum haircut for zero-default customers using regression models</li>
+            <li>Recommended haircut of 18.76% for a banking client with 7% default risk</li>
+            <li>Demonstrated a data-driven framework for credit risk and collateral optimization</li>
+        </ul>
+    </div>
+
+    <a href="https://docs.google.com/spreadsheets/d/1ZPHYSTOHFAMu73F1F3P3dgBlmWU-np0_/edit?usp=sharing&ouid=113143418331145828221&rtpof=true&sd=true" target="_blank" class="btn-case-study">
+        📊 View Data Analysis PDF
+    </a>
+</div>
+
+            <!-- Volopay Product Intern Assignment -->
+<div class="case-study">
+    <div class="case-study-header">
+        <span class="case-study-tag">Product Intern Assignment</span>
+        <h3>Volopay: Multi-Case Product Strategy Portfolio</h3>
+        <p class="case-study-meta">4 case studies applying ICE, RICE, HEART, OKRs & growth frameworks</p>
+    </div>
+
+    <!-- Case 1: PhonePe Onboarding -->
+    <div class="case-study-section">
+        <h4>Case 1: PhonePe Onboarding Optimization</h4>
+        <p><strong>Problem:</strong> 7-step onboarding causes drop-offs; 100+ bank options create paralysis; no first-transaction guidance</p>
+        
+        <p><strong>Framework:</strong> Progressive Disclosure + Fogg Behavior Model</p>
+        
+        <p><strong>5 UX Improvements:</strong></p>
+        <ul>
+            <li>Progressive onboarding with value-driven steps & skip options</li>
+            <li>Smart bank detection with visual logos & "Most Popular" section</li>
+            <li>Social proof (real-time stats) + gamification (achievement badges)</li>
+            <li>ML-based first action recommendations + ₹1 tutorial transaction</li>
+            <li>Human-centered error messages + contextual video tutorials</li>
+        </ul>
+        
+        <p><strong>Impact:</strong> Onboarding completion +35% | Time to first transaction -60% | 7-day activation +40%</p>
+    </div>
+
+    <!-- Case 2: Finance Automation Suite -->
+    <div class="case-study-section">
+        <h4>Case 2: Volopay Finance Automation Suite</h4>
+        <p><strong>Problem:</strong> Fragmented invoice intake, delayed GST reconciliation, manual vendor chasing, slow payment approvals</p>
+        
+        <p><strong>Framework:</strong> OKRs + RICE Scoring | North Star: Finance team hours saved/month</p>
+        
+        <p><strong>4-Module n8n Solution:</strong></p>
+        <ul>
+            <li>Smart Invoice Dashboard (OCR + ML) - Auto-ingest & extract fields</li>
+            <li>GST Reconciliation Engine - Match GSTR-2A/2B, flag mismatches</li>
+            <li>Vendor Reminder Automation - Multi-channel outreach with escalation</li>
+            <li>Auto-Payable Workflow - Auto-pay <₹10K, route large to CFO</li>
+        </ul>
+        
+        <p><strong>6-Month Targets:</strong> 90% invoices auto-digitized (from <20%) | 95% GST reconciled on time (from 60%) | <24h approval SLA (from 2-3 days)</p>
+    </div>
+
+    <!-- Case 3: Onboarding Drop-off Reduction -->
+    <div class="case-study-section">
+        <h4>Case 3: Self-Onboarding Drop-off Reduction</h4>
+        <p><strong>Problem:</strong> Users drop off 24-48hrs post-document upload; decision paralysis on first transaction</p>
+        
+        <p><strong>Framework:</strong> ICE Prioritization + HEART Metrics</p>
+        
+        <p><strong>3 Growth Experiments:</strong></p>
+        <ul>
+            <li><strong>Real-Time Document Validation (ICE 9.0):</strong> AI scanner with instant feedback, smart retry flow → Document approval +30%, drop-off -35%</li>
+            <li><strong>Contextual First Transaction Nudge (ICE 8.5):</strong> Personalized templates, "Quick Win" scenarios → First transaction +40%, 30-day retention +25%</li>
+            <li><strong>Behavioral Engagement Automation (ICE 8.5):</strong> Multi-channel + guided walkthroughs → Activation +28%, cost per user -25%</li>
+        </ul>
+        
+        <p><strong>6-Week Impact:</strong> +35% activation (+200 users/month) | -50% support tickets | +₹2.5M GMV | 5:1 ROI</p>
+    </div>
+
+    <!-- Case 4A: Web3 Ecosystem -->
+    <div class="case-study-section">
+        <h4>Case 4A: Volopay Web3 Corporate Finance Ecosystem</h4>
+        <p><strong>Opportunity:</strong> Web3 companies ($2.3B+ funding) face banking denial, idle treasuries, expensive cross-border payroll, no B2B loyalty</p>
+        
+        <p><strong>Solution:</strong> Crypto-enabled cards + DeFi treasury + blockchain payroll + $VOLO token community marketing</p>
+        
+        <p><strong>12-Month Validation:</strong></p>
+        <ul>
+            <li>Phase 1 (M1-3): Survey 100 clients, 5 pilot companies, regulatory approval</li>
+            <li>Phase 2 (M4-6): 25 companies, 5K $VOLO holders, 1M+ Twitter impressions</li>
+            <li>Phase 3 (M7-9): 100+ companies, 20K community, 5 viral launches</li>
+            <li>Phase 4 (M10-12): 300 companies, 50K community (90%+ active), $100M+ monthly volume</li>
+        </ul>
+        
+        <p><strong>Revenue Impact:</strong> $8.33M ARR (300%+ increase) | 5x customer LTV | 80% lower CAC via community growth</p>
+    </div>
+
+    <!-- Case 4B: Treasury -->
+    <div class="case-study-section">
+        <h4>Case 4B: Volopay Treasury - Automated Cash Management</h4>
+        <p><strong>Problem:</strong> 60% of SMEs fail due to cash flow issues; SGD 800M lost annually in idle cash earning 0.1% vs. 3-4% money market funds</p>
+        
+        <p><strong>Solution:</strong> Auto-invest idle business cash in low-risk, liquid assets with 1-7 day liquidity</p>
+        
+        <p><strong>Validation Phases:</strong></p>
+        <ul>
+            <li>M1-2 (Research): Survey 200+ customers, 40% interest, $250K+ avg idle cash</li>
+            <li>M3-4 (Concierge MVP): 10-15 pilots, manual execution, NPS >70, 2-4% returns</li>
+            <li>M5-8 (Automated MVP): 50 beta customers, $15M+ AUM, 25% signup rate</li>
+            <li>M9-12 (Full Launch): $50M+ AUM, $375K+ ARR, 15% retention improvement</li>
+        </ul>
+        
+        <p><strong>Year 2-3 Projection:</strong> 500 customers × $800K avg cash × 0.75% fee = $3M ARR</p>
+    </div>
+
+    <!-- Key Frameworks -->
+    <div class="case-study-section">
+        <h4>Frameworks & Methodologies Applied</h4>
+        <ul>
+            <li><strong>Product:</strong> Progressive Disclosure, Fogg Behavior Model, Choice Architecture</li>
+            <li><strong>Prioritization:</strong> ICE/RICE Scoring, OKRs, HEART Metrics</li>
+            <li><strong>Measurement:</strong> North Star Metrics, Leading/Lagging Indicators, Invoice Automation Funnel</li>
+            <li><strong>Validation:</strong> Concierge MVP → Automated MVP → Full Launch</li>
+            <li><strong>Testing:</strong> Sequential A/B tests (10% → 50% → 100% rollout, 95% significance)</li>
+        </ul>
+    </div>
+
+    <a href="https://drive.google.com/file/d/1AuaY8-75TkzR8YDRUum1A_TJZKoIQ4_f/view?usp=sharing" target="_blank" class="btn-case-study">
+        📄 View Full Assignment PDF (46 pages with wireframes, n8n workflows & market research)
+    </a>
+</div>
+          
+
+           <!-- CloudEagle AI Automation Assignment -->
+<div class="case-study">
+    <div class="case-study-header">
+        <span class="case-study-tag">Technical Assignment</span>
+        <h3>CloudEagle: AI-Driven SaaS Automation System</h3>
+        <p class="case-study-meta">Web automation solution for user provisioning & data extraction without APIs</p>
+    </div>
+
+    <!-- Problem Understanding -->
+    <div class="case-study-section">
+        <h4>1. Problem Understanding</h4>
+        
+        <p><strong>Why SaaS Apps Lack APIs:</strong></p>
+        <ul>
+            <li><strong>Business:</strong> High dev costs, vendor lock-in strategy, premium-tier revenue gates</li>
+            <li><strong>Technical:</strong> Legacy systems, complex multi-tenant permissions, security risks</li>
+        </ul>
+
+        <p><strong>Automation Challenges:</strong></p>
+        <ul>
+            <li>MFA, session timeouts, CAPTCHA verification</li>
+            <li>Dynamic UIs, frequent layout changes, JavaScript-heavy SPAs</li>
+            <li>Pagination patterns, client-side rendering, bot detection</li>
+        </ul>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="case-study-section">
+        <h4>2. Technology Stack</h4>
+        
+        <p><strong>Core Components:</strong></p>
+        <ul>
+            <li><strong>AI Layer:</strong> Claude API ($0.003/1K tokens) for HTML parsing + GPT-4 Vision for complex UIs</li>
+            <li><strong>Browser:</strong> Playwright with stealth mode (modern SPAs, network interception)</li>
+            <li><strong>Orchestration:</strong> LangChain workflows + OpenAI Function Calling for structured outputs</li>
+            <li><strong>Auth Tools:</strong> pyotp (TOTP), Twilio (SMS MFA), AWS Secrets Manager</li>
+            <li><strong>CAPTCHA:</strong> playwright-stealth first → 2Captcha fallback ($1-3/1K solves)</li>
+        </ul>
+
+        <p><strong>Why Custom RPA vs UiPath:</strong> Full control, no licensing fees ($0 vs $1K-1.5K/month), tailored to our stack</p>
+    </div>
+
+    <!-- Solution Architecture -->
+    <div class="case-study-section">
+        <h4>3. Solution Workflow</h4>
+        
+        <p><strong>User Data Scraping:</strong></p>
+        <ul>
+            <li><strong>Authentication:</strong> Stealth browser → AI identifies login fields → Handle MFA (TOTP/SMS) → Cache session 24-48hrs</li>
+            <li><strong>Navigation:</strong> Try known path → AI analyzes HTML if broken → Find elements semantically → Update profile</li>
+            <li><strong>Extraction:</strong> AI parses table structure → Handle pagination/infinite scroll → Validate data formats → Export structured JSON</li>
+            <li><strong>Self-Healing:</strong> Cache working selectors → On failure, use AI vision → Semantic search ("find users table") → Auto-update selector DB</li>
+        </ul>
+
+        <p><strong>Provisioning & Deprovisioning:</strong></p>
+        <ul>
+            <li><strong>Add User:</strong> Navigate to form → AI maps fields (email, role, permissions) → Fill progressively → Handle multi-step wizards → Screenshot confirmation</li>
+            <li><strong>Remove User:</strong> Search by email → Backup data first → AI finds delete button for specific row → Confirm dialogs → Verify removal → Audit log</li>
+        </ul>
+
+        <p><strong>Handling Edge Cases:</strong></p>
+        <ul>
+            <li>MFA: Dedicated automation accounts with TOTP seeds + backup codes</li>
+            <li>Rate Limits: Random 2-5s delays between actions (18% failure → 5%)</li>
+            <li>UI Changes: Multi-modal approach (cached selectors → semantic search → AI vision fallback)</li>
+        </ul>
+    </div>
+
+    <!-- Scalability -->
+    <div class="case-study-section">
+        <h4>4. Scalability Strategy</h4>
+        
+        <p><strong>Profile-Based Architecture:</strong></p>
+        <ul>
+            <li>YAML config per app: login URL, auth type, known selectors, rate limits</li>
+            <li>Auto-generation: Manual exploration → AI creates profile → Validate → Continuous updates on UI changes</li>
+            <li>Result: Hours to add new apps (vs days), 90% less ongoing maintenance</li>
+        </ul>
+
+        <p><strong>AI Resilience Against UI Changes:</strong></p>
+        <ul>
+            <li><strong>Adaptive Navigation:</strong> Semantic search vs rigid CSS selectors → 90% success after updates (vs 60% traditional)</li>
+            <li><strong>Structural Fingerprinting:</strong> DOM signatures detect changes → Auto-retrain in 1-3hrs (vs 2-5 days manual)</li>
+            <li><strong>Cross-App Learning:</strong> Patterns transfer between apps → 2-day integration (vs 5 days)</li>
+            <li><strong>Cost Savings:</strong> 50 apps = $240K-490K saved annually (AI $100-200/app vs manual $5K-10K/app)</li>
+        </ul>
+
+        <p><strong>Infrastructure:</strong></p>
+        <ul>
+            <li>Parallel execution: Browser pooling + Celery/Redis queues → 50+ apps, 500+ tasks/hour</li>
+            <li>Session reuse: 24-48hr cookies → 80% auth overhead reduction</li>
+            <li>Incremental updates: Only changed data → 60-70% bandwidth savings</li>
+            <li>Cost: ~$50/month per 10 apps (linear scaling)</li>
+        </ul>
+    </div>
+
+    <!-- Validation Approach -->
+    <div class="case-study-section">
+        <h4>5. Validation & Rollout</h4>
+        
+        <p><strong>Tested on Notion:</strong> React SPA with TOTP MFA representing real SaaS complexity. Ran 50 operations over 2 weeks with 150+ test users.</p>
+        
+        <p><strong>Results:</strong></p>
+        <ul>
+            <li>Authentication: 98% success, 10s → 2s on repeat runs (session reuse)</li>
+            <li>Navigation: AI recovered from UI update in 3 hours (94% → 61% → 91%)</li>
+            <li>Data extraction: 95% accuracy, handled infinite scroll after DOM observer fix</li>
+            <li>Overall: 87% → 95% success rate after implementing retry logic</li>
+        </ul>
+
+        <p><strong>3-Phase Rollout:</strong></p>
+        <ul>
+            <li><strong>Phase 1 (Weeks 1-4):</strong> Validate on 3 diverse apps (Slack, Trello, HubSpot), 90%+ success, <$0.03/operation</li>
+            <li><strong>Phase 2 (Weeks 5-8):</strong> Build monitoring dashboard, zero undetected failures for 2 weeks, <5min alert response</li>
+            <li><strong>Phase 3 (Months 3-6):</strong> Scale to 20 apps, $5K MRR, <2hrs maintenance per app/week</li>
+        </ul>
+
+        <p><strong>North Star Metric:</strong> Customer time saved per month (Target: 100+ hours = $5K value)</p>
+    </div>
+
+    <!-- Key Insights -->
+    <div class="case-study-section">
+        <h4>6. Key Insights</h4>
+        <ul>
+            <li>AI self-healing cuts UI change recovery from 2-5 days to 3 hours</li>
+            <li>Session reuse enables 5x throughput (100 → 500 tasks/hour per worker)</li>
+            <li>60% of failures are transient network issues—exponential backoff gets 87% → 95% without better AI</li>
+            <li>Profile-based architecture means 3 → 50+ apps without rewriting core logic</li>
+        </ul>
+    </div>
+
+    <!-- Implementation -->
+    <div class="case-study-section">
+        <h4>7. Implementation Steps</h4>
+        <ol>
+            <li>App Profile Creation: YAML config with auth methods, selectors, AI hints</li>
+            <li>Authentication Module: AWS Secrets + TOTP generation + session persistence</li>
+            <li>Navigation Engine: AI-guided routing + page verification + error recovery</li>
+            <li>Data Extraction: AI HTML parsing + pagination handling + data validation</li>
+            <li>Action Execution: Form mapping + multi-step workflows + audit logging</li>
+        </ol>
+    </div>
+
+    <!-- Links -->
+    <div class="case-study-section">
+        <p><strong>Code & Prototype:</strong></p>
+        <ul>
+            <li><a href="https://github.com/rohitrathi28/i-automation-data-scraper-and-provisioning-pseudo-code/tree/main" target="_blank">Pseudocode & Implementation →</a></li>
+            <li><a href="https://github.com/rohitrathi28/cloudeagle-automation" target="_blank">Working Prototype →</a></li>
+        </ul>
+    </div>
+
+    <a href="https://drive.google.com/file/d/1bNClK4ZeFeR_EcTzRaUm_Ta5r54fvv3m/view?usp=sharing" target="_blank" class="btn-case-study">
+        📄 View Full Assignment PDF (Technical Deep Dive with Architecture Diagrams)
+    </a>
+</div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Building & Learning</span>
+                <h2 class="section-title">Coding Projects</h2>
+                <p class="section-subtitle">Real products built to solve problems and learn product thinking.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- CuraConnect -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">CuraConnect: Hospital at Home</h3>
+                            <span class="project-role">Product Manager & Developer</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Comprehensive online doctor consulting platform addressing the gap in accessible healthcare services. Led the project from concept to implementation, conducting stakeholder research with healthcare professionals.
+                    </p>
+                    <div class="project-learning">
+                        <strong>Product Learning:</strong>
+                        Authored complete SRS document defining functional requirements. Created UML diagrams including Use Case, Data Flow, and Sequence diagrams. Managed cross-functional development using Scrum sprints in Jira, learning sprint planning, backlog grooming, and stakeholder coordination.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">MERN Stack</span>
+                        <span class="tech-tag">Agile/Scrum</span>
+                        <span class="tech-tag">Jira</span>
+                        <span class="tech-tag">SRS Documentation</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1BnSgirDKHRmgKyvI1nIP2DHsM5JP5Gpi?usp=sharing" target="_blank" class="btn-github">
+                        📂 View Project Files
+                    </a>
+                </div>
+
+                <!-- Crypted Vault -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Crypted Vault: Decentralized Storage</h3>
+                            <span class="project-role">Full Stack Developer</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Decentralized image storage solution built after identifying privacy concerns in centralized cloud storage through competitive analysis. Users maintain complete ownership via wallet-based authentication.
+                    </p>
+                    <div class="project-learning">
+                        <strong>Product Learning:</strong>
+                        Conducted competitive analysis of centralized storage providers. Defined product vision around user ownership and privacy. Made technical trade-offs between decentralization benefits vs. user experience complexity. AES-256 encryption with IPFS and Ethereum smart contracts ensures no single point of failure.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">IPFS</span>
+                        <span class="tech-tag">Ethereum</span>
+                        <span class="tech-tag">Solidity</span>
+                        <span class="tech-tag">Web3</span>
+                    </div>
+                    <a href="https://github.com/rohitrathi28/blockchain_encrpted_image_vault" target="_blank" class="btn-github">
+                        💻 View on GitHub
+                    </a>
+                </div>
+
+                <!-- Second Brain -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Second Brain – Knowledge Hub</h3>
+                            <span class="project-role">Full Stack Developer</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Personal knowledge management system for students to centralize learning resources from YouTube, Twitter, and articles. Prioritized quick capture and flexible organization based on user research.
+                    </p>
+                    <div class="project-learning">
+                        <strong>Product Learning:</strong>
+                        Identified user pain point through research: students struggle with scattered learning resources across platforms. Prioritized core features: quick capture, tagging system, and search. Built MVP with essential functionality, deferring advanced features like AI-powered recommendations for later iterations.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">Cloudinary</span>
+                    </div>
+                    <a href="https://github.com/rohitrathi28/second-brain" target="_blank" class="btn-github">
+                        💻 View on GitHub
+                    </a>
+                </div>
+
+                <!-- AI Resume Analyzer -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">AI Resume Analyzer</h3>
+                            <span class="project-role">Developer</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        AI-powered tool to automate resume screening for recruiters, reducing manual review time while providing accurate candidate evaluation and actionable insights.
+                    </p>
+                    <div class="project-learning">
+                        <strong>Product Learning:</strong>
+                        Researched recruiter workflows to understand pain points in manual screening. Defined requirements for accuracy and actionable output. Used NLP and LLMs (Google Gemini API) for data extraction and role suitability assessment. Created detailed architecture documentation for transparency.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">spaCy</span>
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">NLP</span>
+                    </div>
+                    <a href="https://github.com/rohitrathi28/ai-resume-analyser" target="_blank" class="btn-github">
+                        💻 View on GitHub
+                    </a>
+                </div>
+
+                <!-- ML Projects -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">ML & Data Science Projects</h3>
+                            <span class="project-role">Data Scientist</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Multiple machine learning projects including stress classification in students (90% accuracy), life expectancy prediction (R² 0.824), and vehicle trajectory analysis using fuzzy logic.
+                    </p>
+                    <div class="project-learning">
+                        <strong>Product Learning:</strong>
+                        Learned to evaluate model performance using business metrics, not just technical accuracy. Understood importance of explainability and transparency in ML products. Documented findings in IEEE-style research paper for knowledge sharing.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">ML Algorithms</span>
+                        <span class="tech-tag">Data Analysis</span>
+                    </div>
+                    <a href="https://github.com/rohitrathi-cse/machine-learning-projects" target="_blank" class="btn-github">
+                        💻 View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Journey -->
+    <section id="journey">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Growth Mindset</span>
+                <h2 class="section-title">My Product Learning Journey</h2>
+                <p class="section-subtitle">How I'm developing product thinking as a beginner.</p>
+            </div>
+
+            <div class="journey-cards">
+                <div class="journey-card">
+                    <div class="journey-icon">🎯</div>
+                    <h4>Structured Frameworks</h4>
+                    <p>Learning to approach ambiguous problems systematically using CIRCLES, CRSDIO, and other PM frameworks. These help me structure my thinking and communicate clearly.</p>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-icon">🔧</div>
+                    <h4>Engineering Advantage</h4>
+                    <p>My technical background helps me evaluate feasibility, understand technical constraints, and communicate effectively with engineering teams about trade-offs.</p>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-icon">📊</div>
+                    <h4>Data-Driven Thinking</h4>
+                    <p>Learning to define success metrics upfront, think about A/B testing, and make decisions based on data rather than assumptions. Still developing intuition for which metrics matter most.</p>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-icon">👥</div>
+                    <h4>User Empathy</h4>
+                    <p>Practicing user research techniques—understanding pain points, validating assumptions, and building for real problems rather than perceived needs. Still learning to ask better questions.</p>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-icon">⚖️</div>
+                    <h4>Trade-off Thinking</h4>
+                    <p>Learning that product management is about saying no as much as saying yes. Practicing prioritization frameworks and understanding opportunity cost.</p>
+                </div>
+
+                <div class="journey-card">
+                    <div class="journey-icon">📝</div>
+                    <h4>Documentation Practice</h4>
+                    <p>Building the habit of writing clear PRDs, user stories, and technical specs. Learning to communicate context and decisions for future reference.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Background</span>
+                <h2 class="section-title">Experience & Achievements</h2>
+            </div>
+
+            <div class="experience-timeline">
+                  <div class="experience-item">
+                    <h4>Current Learning</h4>
+                    <p class="experience-meta">Ongoing • 2025</p>
+                    <p><strong>McKinsey Forward Program</strong> (Pursuing - Oct 2025): Business strategy and problem-solving frameworks<br>
+                    <strong>Deep Learning, AI, ML & Web3 Cohort</strong> (Pursuing - Jan 2025): Advanced technical skills in emerging technologies</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Teaching Assistant</h4>
+                    <p class="experience-meta">Ahmedabad University • Aug 2024 – Dec 2024</p>
+                    <p>Guided 70 students in Python, Excel, and statistics. Adapted teaching methods based on student feedback to improve comprehension and engagement. Learned to communicate complex concepts clearly and adjust approach based on audience understanding.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h4>Research Assistant - Fintech Market Analysis</h4>
+                    <p class="experience-meta">Under Prof. Ramizur Rahman • Mar 2023 - May 2023</p>
+                    <p>Conducted market research analyzing cryptocurrencies, fintech companies, and green bonds through academic papers. Performed data analysis to identify behavioral patterns, value trends, and emerging opportunities in the fintech ecosystem. Learned to synthesize insights from multiple sources and present findings clearly.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h4>Peer Tutor - Financial Management</h4>
+                    <p class="experience-meta">Ahmedabad University • Aug 2024 - Dec 2024</p>
+                    <p>Selected as peer tutor based on excellent performance in financial management course. Helped fellow students understand complex financial concepts and problem-solving approaches.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h4>AWS DeepRacer Competition</h4>
+                    <p class="experience-meta">Provisional Winner • Apr 2023 - Sep 2023</p>
+                    <p>Trained reinforcement learning models to complete tracks in under 3 minutes using ML algorithms. Achieved global rank of 1338/5370 and India rank of 581/2127. Learned to iterate based on performance data and optimize for specific constraints.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h4>Volunteer - Prabhat Foundation</h4>
+                    <p class="experience-meta">Jan 2022 - Jun 2022</p>
+                    <p>Community service and social impact work, developing empathy and understanding of diverse user needs.</p>
+                </div>
+
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-tag">Let's Connect</span>
+                    <h3>Get In Touch</h3>
+                    <p>I'm actively looking for Product Manager and Product Intern opportunities where I can apply my technical background and growing product thinking skills. Open to conversations about product, technology, and building things that matter.</p>
+                </div>
+
+                <div class="contact-links">
+                   <a href="mailto:rohitrathicse@gmail.com" class="contact-link">
+  <div class="contact-icon">✉️</div>
+  <div>
+    <div style="font-weight: 600;">Email</div>
+    <div style="font-size: 14px; color: var(--text-secondary);">
+      rohitrathicse@gmail.com
+    </div>
+  </div>
+</a>
+
+
+                    <a href="https://www.linkedin.com/in/rohit-rathi-1bb660261/" target="_blank" class="contact-link">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <div style="font-weight: 600;">LinkedIn</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Connect with me</div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/rohitrathi28" target="_blank" class="contact-link">
+                        <div class="contact-icon">💻</div>
+                        <div>
+                            <div style="font-weight: 600;">GitHub</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">View my code</div>
+                        </div>
+                    </a>
+
+                    <a href="https://drive.google.com/file/d/1T-0_wYvQOfZG4Rcg9P-mxgWWYKYIo5Mq/view?usp=sharingf" download class="contact-link">
+                        <div class="contact-icon">📄</div>
+                        <div>
+                            <div style="font-weight: 600;">Resume</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Download PDF</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Rohit Rathi • Built with curiosity and code • Learning product, one framework at a time</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.project-card, .skill-category, .case-study, .journey-card, .experience-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Add active state to navigation based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+           navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
